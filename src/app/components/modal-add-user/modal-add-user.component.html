@@ -1,0 +1,77 @@
+<ng-template #addFormModal let-modal>
+  <!-- <div class="modal-header">
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addForm">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3>Add Employee</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" aria-describedby="nameId"
+                   formControlName="name" placeholder="Name..."/>
+            <small *ngIf="
+                addForm.get('name')?.invalid && (addForm.get('name')?.dirty || addForm.get('name')?.touched)
+              " id="nameId" class="form-text text-muted">Name is requied</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" id="email" aria-describedby="emailId"
+                   formControlName="email" placeholder="Email..."/>
+            <small *ngIf="
+                addForm.get('email')?.invalid &&
+                (addForm.get('email')?.dirty || addForm.get('email')?.touched)
+              " id="emailId" class="form-text text-muted">Email is required (Examp : ***@*****)</small>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phoneId"
+                   formControlName="phone" placeholder="Phone..." mask="(00)0000 0000"/>
+            <small
+              *ngIf="addForm.get('phone')?.invalid &&(addForm.get('phone')?.dirty || addForm.get('phone')?.touched)"
+              id="phoneId" class="form-text text-muted">Phone is (0x)xxxx xxxx </small>
+
+          </div>
+          <div class="form-group">
+            <label for="zone">Zone</label>
+            <select id="zone" class="form-control" name="zone" formControlName="zone">
+              <option selected>East</option>
+              <option>West</option>
+              <option>South</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" class="form-control" name="status" formControlName="status">
+              <option selected>Working</option>
+              <option>Resigned</option>
+              <option>Pending</option>
+            </select>
+          </div>
+        </div>
+        <div class="submit-btn card-footer text-muted d-flex justify-content-end">
+          <button [disabled]="addForm.invalid" type="submit" name="" id="" class="btn btn-primary mr-2"
+                  (click)="modal.close('Save click')">
+            Save
+          </button>
+          <div type="" class="btn btn-secondary" (click)="modal.close('Save click')">Close</div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Save</button>
+  </div> -->
+</ng-template>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" (click)="open(addFormModal)">
+  Add User
+</button>

@@ -1,0 +1,7 @@
+small {
+  color: red !important;
+}
+
+.submit-btn>button {
+  min-width: 80px;
+}

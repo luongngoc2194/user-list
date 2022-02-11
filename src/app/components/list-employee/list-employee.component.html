@@ -1,0 +1,72 @@
+<!-- <div class="form-inline my-2 my-lg-0 mt-4">
+  <input class="form-control mr-sm-2" type="text" (input)="search()" placeholder="Search..."
+    [(ngModel)]="this.keyword" />
+</div> -->
+<form [formGroup]="searchForm" (submit)="goSearchForm()">
+  <div class="d-flex justify-content-between mt-4">
+    <div class="form-group ">
+      <label for="name">Name :</label>
+      <input type=" text" class="form-control" name="name" id="name" placeholder="name..." formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email :</label>
+      <input type="text" class="form-control" name="email" id="email" placeholder="email..." formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone :</label>
+      <input type="text" class="form-control" name="phone" id="phone" placeholder="phone..." formControlName="phone">
+    </div>
+    <div class="form-group d-flex align-items-end">
+      <button type="submit" class="btn btn-primary ">Search</button>
+    </div>
+  </div>
+</form>
+<!--<app-messages></app-messages>-->
+<table class="table table-striped table-hover table-bordered table-inverse text-center mt-4">
+  <thead class="thead-inverse">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>zone</th>
+    <th>Status</th>
+    <th>Phone</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr
+    *ngFor="let item of employees |paginate: { itemsPerPage: perPage, currentPage: page ,totalItems :totalLength },let i = index">
+    <td scope="row">{{ perPage * (page - 1) + i + 1 }}
+    </td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.email }}</td>
+    <td>{{ item.zone }}</td>
+    <td>{{ item.status }}</td>
+    <td>{{ item.phone }}</td>
+    <!-- <td>{{ item.isShowDelete }}</td> -->
+    <td>
+      <button type="button" class="btn btn-primary mr-2" (click)="getId(item.id)">
+        Edit
+      </button>
+      <!--      <button type="button" class="btn btn-danger" (click)="getId(item.id)">-->
+      <!--        Delete-->
+      <!--      </button>-->
+      <app-project-add [id]="item.id" (onDelete)="delete($event)"></app-project-add>
+
+      <!-- <div *ngIf="expression" id="ask-box-{{item.name}}">nul</div> -->
+
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+  <pagination-controls (pageChange)="page = $event" (pageBoundsCorrection)="page=$event"></pagination-controls>
+</div>
+
+<app-modal-add-user (onReload)="reload($event)"></app-modal-add-user>
+<app-update-employee [id]="id" [random]="random" (onReload)="reload($event)"></app-update-employee>
+
+
